@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import androidx.gridlayout.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<player> arr=new ArrayList<player>();
     private int ii,str;
     private boolean cont;
+    private Button b1;
+    private GridLayout gridLayout;
 
     private player current;
     @Override
@@ -30,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         current= player.ONE;
-
+        b1=(Button)findViewById(R.id.button);
+        gridLayout=(GridLayout) findViewById(R.id.grid);
     }
     public void anime(View V) {
         if (cont == true) {
@@ -53,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
             isWon();
-            if (!arr.contains(player.ZERO)&&cont==true)
+            if (!arr.contains(player.ZERO)&&cont==true) {
                 Toast.makeText(MainActivity.this, "NOBODY WINS", Toast.LENGTH_LONG).show();
-            Log.i("my", " : " + str);
+                b1.setVisibility(View.VISIBLE);
+            }Log.i("my", " : " + str);
 
         }
     }
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     (arr.get(2)==player.ONE&&arr.get(4)==player.ONE&&arr.get(6)==player.ONE)) {
                 Toast.makeText(MainActivity.this, "PLAYER ONE WINS", Toast.LENGTH_LONG).show();
                 cont=false;
+                b1.setVisibility(View.VISIBLE);
             }
             else if((arr.get(0)==player.TWO&&arr.get(1)==player.TWO&&arr.get(2)==player.TWO)||
                     (arr.get(3)==player.TWO&&arr.get(4)==player.TWO&&arr.get(5)==player.TWO)||
@@ -82,7 +89,23 @@ public class MainActivity extends AppCompatActivity {
                     (arr.get(2)==player.TWO&&arr.get(4)==player.TWO&&arr.get(6)==player.TWO)) {
                 Toast.makeText(MainActivity.this, "PLAYER TWO WINS", Toast.LENGTH_LONG).show();
                 cont=false;
+                b1.setVisibility(View.VISIBLE);
 
             }
+        }
+        public void reset(View vr){
+        for(int im=0;im<gridLayout.getChildCount();im++)
+        {
+            ImageView imo=(ImageView)gridLayout.getChildAt(im);
+            imo.setImageDrawable(null);
+            imo.setAlpha(0.2f);
+        }
+            for(ii=0;ii<9;ii++)
+            {
+                arr.set(ii,player.ZERO);
+            }
+            cont=true;
+            current= player.ONE;
+            b1.setVisibility(View.GONE);
         }
 }
