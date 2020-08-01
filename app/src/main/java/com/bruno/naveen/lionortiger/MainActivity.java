@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         {
             ImageView imo=(ImageView)gridLayout.getChildAt(im);
             imo.setImageDrawable(null);
+
             imo.setAlpha(0.2f);
         }
             for(ii=0;ii<9;ii++)
