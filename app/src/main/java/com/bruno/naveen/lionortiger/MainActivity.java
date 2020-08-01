@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         ZERO,ONE,TWO
     };
     private ArrayList<player> arr=new ArrayList<player>();
-    private int ii,str;
+    private int ii,str,count=0;
     private boolean cont;
     private Button b1;
     private GridLayout gridLayout;
-
+    private ImageView fg,gh;
     private player current;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         }
         cont=true;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         current= player.ONE;
-        b1=(Button)findViewById(R.id.button);
-        gridLayout=(GridLayout) findViewById(R.id.grid);
+
+        setContentView(R.layout.select);
+
     }
     public void anime(View V) {
         if (cont == true) {
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (i.getAlpha() == 0.2f) {
                 if (current == player.ONE) {
-                    i.setImageResource(R.drawable.tiger);
-                    current = player.TWO;
+                  i.setImageDrawable(fg.getDrawable());
+                  current = player.TWO;
                 } else {
-                    i.setImageResource(R.drawable.lion);
-
+                    i.setImageDrawable(gh.getDrawable());
+                 //   i=gh;
                     current = player.ONE;
                 }
                 i.setTranslationX(-2000);
@@ -108,5 +108,28 @@ public class MainActivity extends AppCompatActivity {
             cont=true;
             current= player.ONE;
             b1.setVisibility(View.GONE);
+            count=0;
+            fg=null;
+            gh=null;
+            setContentView(R.layout.select);
+        }
+        public void sel(View v)
+        {
+            if(count==0)
+            {fg=(ImageView)v;
+                count++;
+                fg.setAlpha(0.2f);
+                return;
+            }
+            else if(count==1)
+            {
+                gh=(ImageView)v;
+                count++;
+                gh.setAlpha(0.2f);
+                setContentView(R.layout.activity_main);
+                b1=(Button)findViewById(R.id.button);
+                gridLayout=(GridLayout) findViewById(R.id.grid);
+
+            }
         }
 }
