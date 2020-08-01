@@ -34,14 +34,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void anime(View V) {
         if (cont == true) {
-            ii = 10;
+
             ImageView i = (ImageView) V;
-            str = V.getId() % ii;
-            if (str != 0) {
-                arr.set(str - 2, current);
-            } else {
-                arr.set(8, current);
-            }
+            str = Integer.parseInt(i.getTag().toString());
+            arr.set(str,current);
 
             if (i.getAlpha() == 0.2f) {
                 if (current == player.ONE) {
